@@ -17,9 +17,11 @@ namespace BankingTests
 
         public BankAccountTests()
         {
-            _account = new BankAccount(new Mock<ICanCalculateBankAccountBonuses>().Object, new Mock<INotifyTheFed>().Object);
+            _account = new BankAccount(
+                new Mock<ICanCalculateBankAccountBonuses>().Object,
+                new Mock<INotifyTheFeds>().Object
+                );
             _balance = _account.GetBalance();
-
         }
         [Fact]
         public void NewAccountsHaveCorrectBalance()
@@ -57,11 +59,5 @@ namespace BankingTests
                 _account.GetBalance());
         }
     }
-    public class DummyBonusCalculator : ICanCalculateBankAccountBonuses
-    {
-        public decimal For(decimal balance, decimal amountToDeposit)
-        {
-            return 0;
-        }
-    }
+
 }
